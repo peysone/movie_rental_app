@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wypożyczalnia Filmów</title>
+</head>
+<body>
+    <h1>Wypożyczalnia Filmów</h1>
+    <form action="/run_code" method="post">
+        <label for="film_title">Wprowadź tytuł filmu:</label>
+        <input type="text" id="film_title" name="film_title" required>
+        <button type="submit">Wyszukaj</button>
+    </form>
+    <div id="result">
+    {% if result %}
+        <p>{{ result }}</p>
+        {% if 'Film' in result and 'wypożyczony' in result %}
+            <form action="/return" method="post">
+                <input type="hidden" name="return_film" value="{{ result.split('\'')[1] }}">
+                <button type="submit">Zwróć</button>
+            </form>
+            <form method="get" action="/">
+                <button type="submit">Cofnij</button>
+            </form>
+        {% elif 'Znaleziono film:' in result %}
+            <form action="/rent" method="post">
+                <input type="hidden" name="rent_film" value="{{ result.split(':')[1].strip() }}">
+                <button type="submit">Wypożycz</button>
+            </form>
+        {% endif %}
+    {% endif %}
+</div>
+
+</body>
+</html>

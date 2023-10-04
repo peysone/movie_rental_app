@@ -2,6 +2,7 @@ import requests
 from flask import Flask, render_template, request
 """
 aplikacja do obsługi wypożyczalni filmów, korzystająca z API serwisu TMDB
+user ma możliwość znalezienia filmu w bazie danych, wypożyczyć oraz go zwrócić, wszystkie akcje zapisują się do pliku tekstowego
 """
 app = Flask(__name__)
 
